@@ -9,3 +9,6 @@
 01/28/23
 - Uploaded Homework2 Part2 file. 
 - Uploaded Homework2 Part1 file. 
+
+01/31/23
+- Uploaded Homework3 file. 
