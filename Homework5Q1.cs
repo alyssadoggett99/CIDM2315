@@ -1,21 +1,18 @@
 ﻿namespace Homework5Q1;
 class Program
 {
-    static int largest_num(int a, int b){
-        if(a>b){
+       static int largest(int a, int b){
+        if (a>b)
+        {
             return a;
         }
-        else if(b>a){
+        else
+        {
             return b;
-        }
-        else{
-            return -1;
-        }
-    }
-    static void Main() {
+        } }
+    static void Main(){
         int a = 3, b = 5;
-        int largest = largest_num(a, b);
+        int largest_num = largest(a, b);
         
-    Console.WriteLine($"a = {a}; b={b} \nThe largest number is: " + largest);
-    }
+    Console.WriteLine($"a = {a}; b={b} \nThe largest number is: " + largest_num);}
 }
