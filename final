@@ -2,7 +2,31 @@ using System;
 using System.Collections.Generic;
 
 namespace FinalProject{
-    class Program {
+  class Room {
+         public int Number {get; private set;}
+         public int Capacity {get; private set;}
+         public string CustomerName {get; private set;}
+         public string CustomerEmail {get; private set;}
+         private bool reserved;
+         
+         public Room(int numberm int capacity){
+         Number = number; 
+         Capacity = capacity; }
+         
+         public bool IsAvailable() {
+         return !reserved; }
+         
+         public void CheckIn(string customerName, string customerEmail) {
+         CustomerName = customerName; 
+         CustomerEmail = customerEmail; 
+         reserved = true; }
+         
+         public void CheckOut() {
+         CustomerName = null; 
+         CustomerEmail = null; 
+         reserved = false; 
+  
+  class Program {
         static Dictionary<string, string> dict_login = new Dictionary<string, string>();
         static List<int> rooms = new List<int>();
         static List<string> availableRooms = new List<string>();
