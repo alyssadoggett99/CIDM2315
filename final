@@ -213,4 +213,96 @@ namespace FinalProject{
         }
     }
 }}
+
+
+
+
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(18,31): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\CI
+DM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(20,31): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\CI
+DM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(22,40): warning CS8604: Possible null reference argument for parameter 'key' in 'bool Dictionary<string, string>.TryGetValue(str
+ing key, out string value)'. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(22,54): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\CI
+DM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(39,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(40,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(41,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(42,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(43,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(44,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(45,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(46,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(47,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(48,41): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
+inalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(84,39): error CS0136: A local or parameter named 'room' cannot be declared in this scope because that name is used in an enclosi 
+ng local scope to define a local or parameter [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(87,96): error CS1061: 'Program.Room' does not contain a definition for 'Capacity' and no accessible extension method 'Capacity'  
+accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProjec 
+t.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(98,39): error CS0136: A local or parameter named 'room' cannot be declared in this scope because that name is used in an enclosi 
+ng local scope to define a local or parameter [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(100,38): error CS1061: 'Program.Room' does not contain a definition for 'IsAvailable' and no accessible extension method 'IsAvai 
+lable' accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Fina 
+lProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(100,60): error CS1061: 'Program.Room' does not contain a definition for 'Capacity' and no accessible extension method 'Capacity' 
+ accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProje 
+ct.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(102,52): error CS1061: 'Program.Room' does not contain a definition for 'RoomNo' and no accessible extension method 'RoomNo' acc 
+epting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.c 
+sproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(102,75): error CS1061: 'Program.Room' does not contain a definition for 'Capacity' and no accessible extension method 'Capacity' 
+ accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProje 
+ct.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(112,43): error CS0136: A local or parameter named 'room' cannot be declared in this scope because that name is used in an enclos 
+ing local scope to define a local or parameter [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(114,42): error CS1061: 'Program.Room' does not contain a definition for 'RoomNo' and no accessible extension method 'RoomNo' acc 
+epting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.c 
+sproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(117,42): error CS1061: 'Program.Room' does not contain a definition for 'CheckIn' and no accessible extension method 'CheckIn' a 
+ccepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject 
+.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(130,39): error CS0136: A local or parameter named 'room' cannot be declared in this scope because that name is used in an enclos
+ing local scope to define a local or parameter [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(154,38): error CS1061: 'Program.Room' does not contain a definition for 'CheckOut' and no accessible extension method 'CheckOut' 
+ accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProje 
+ct.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(79,33): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\CI 
+DM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(95,51): warning CS8604: Possible null reference argument for parameter 's' in 'int int.Parse(string s)'. [C:\Users\alyda\OneDriv 
+e\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(106,48): warning CS8604: Possible null reference argument for parameter 's' in 'int int.Parse(string s)'. [C:\Users\alyda\OneDri 
+ve\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(108,47): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
+IDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(110,48): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
+IDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(141,45): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
+IDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(143,65): warning CS8604: Possible null reference argument for parameter 's' in 'int int.Parse(string s)'. [C:\Users\alyda\OneDri 
+ve\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(143,82): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
+IDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(148,51): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
+IDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(150,33): warning CS8602: Dereference of a possibly null reference. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalP 
+roject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(190,28): warning CS8625: Cannot convert null literal to non-nullable reference type. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\F 
+inalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(185,16): warning CS8618: Non-nullable field 'customerName' must contain a non-null value when exiting constructor. Consider decl
+aring the field as nullable. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
+C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(212,28): warning CS8625: Cannot convert null literal to non-nullable reference type. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\F 
+inalProject\FinalProject.csproj]
+
+The build failed. Fix the build errors and run again.
     
