@@ -24,13 +24,15 @@ namespace FinalProject{
          public void CheckOut() {
          CustomerName = null; 
          CustomerEmail = null; 
-         reserved = false; 
+         reserved = false; }
+         }
   
   class Program {
-        static Dictionary<string, string> dict_login = new Dictionary<string, string>();
-        static List<int> rooms = new List<int>();
+        static Dictionary<string, string> dict_login = new Dictionary<string, string>() {
+        {"Alice" , "123"} };
+        static List<Room> rooms = new List<Room>();
         static List<string> availableRooms = new List<string>();
-        static Dictionary<string, int> reservedRooms = new Dictionary<string, int>();
+        static Dictionary<string, Room> reservedRooms = new Dictionary<string, Room>();
 
         static void initialize_menu() {
             Console.WriteLine("-----CIDM2315 Final Project: Alyssa Doggett------");
@@ -38,14 +40,12 @@ namespace FinalProject{
         }
 
         static bool employee_login(Dictionary<string, string> dict_login) {
-           string username = null;
-           string password = null;
            Console.WriteLine("--> Please input username");
             string username = Console.ReadLine();
             Console.WriteLine("--> Please input password");
             string password = Console.ReadLine();
 
-            if (dict_login.TryGetValue(username, password) && value == password) {
+            if (dict_login.TryGetValue(username, out string value) && value == password) {
                 Console.WriteLine("Login Successfully.");
                 return true;
             } else {
@@ -55,14 +55,6 @@ namespace FinalProject{
         }
     
        public static void Main(string[] args) {
-           
-            dict_login.Add("Alice", "123");
-            var Room = new Dictionary<string, string>();
-            Dictionary<int, Room> reservedRooms = new Dictionary<int, Room>();
-            initialize_menu();
-
-            bool login_result = employee_login(dict_login);
-            while (login_result) {
 
             Room room1 = new Room(101, 2);
             Room room2 = new Room(102, 2);
