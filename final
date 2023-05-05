@@ -195,44 +195,7 @@ namespace FinalProject{
         }
             }}
 
-    class Room
-    {
-        public int Number { get; }
-        public string Type { get; }
-        private bool isReserved;
-        private string customerName;
 
-        public Room(int number, string type)
-        {
-            Number = number;
-            Type = type;
-            isReserved = false;
-            customerName = null;
-        }
-
-        public bool IsReserved()
-        {
-            return isReserved;
-        }
-
-        public string CustomerName
-        {
-            get { return customerName; }
-        }
-
-        public void Reserve(string customerName)
-        {
-            isReserved = true;
-            this.customerName = customerName;
-        }
-
-        public void CancelReservation()
-        {
-            isReserved = false;
-            customerName = null;
-        }
-    }
-}}
 
 
 
