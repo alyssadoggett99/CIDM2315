@@ -121,7 +121,7 @@ namespace FinalProject{
                         string customerEmail = Console.ReadLine();
                         bool roomFound = false;
                             foreach (Room room in rooms) {
-                                if (room.RoomNo == roomNo) {
+                                if (room.Number == Number) {
                                     roomFound = true;
                                     room.CheckIn(customerName, customerEmail);
                                     Console.WriteLine($"Check-In successfully! Customer is assigned to Room {roomNo}"); } }
