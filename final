@@ -9,7 +9,7 @@ namespace FinalProject{
          public string CustomerEmail {get; private set;}
          private bool reserved;
          
-         public Room(int numberm int capacity){
+         public Room(int number int capacity){
          Number = number; 
          Capacity = capacity; }
          
