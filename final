@@ -33,7 +33,7 @@ namespace FinalProject{
        public static void Main(string[] args) {
            
             dict_login.Add("Alice", "123");
-            var Room = new Dictionary<string, string>()
+            var Room = new Dictionary<string, string>();
             Dictionary<int, Room> reservedRooms = new Dictionary<int, Room>();
             initialize_menu();
 
