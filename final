@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace FinalProject{
     class Program {
         static Dictionary<string, string> dict_login = new Dictionary<string, string>();
-        static List<Room> rooms = new List<Room>();
+        static List<int> rooms = new List<int>();
         static List<string> availableRooms = new List<string>();
-        static Dictionary<string, Room> reservedRooms = new Dictionary<string, Room>();
+        static Dictionary<string, int> reservedRooms = new Dictionary<string, int>();
 
         static void initialize_menu() {
             Console.WriteLine("-----CIDM2315 Final Project: Alyssa Doggett------");
@@ -14,12 +14,14 @@ namespace FinalProject{
         }
 
         static bool employee_login(Dictionary<string, string> dict_login) {
-            Console.WriteLine("--> Please input username");
-            string username = Console.ReadLine()?.Trim();
+           string username = null;
+           string password = null;
+           Console.WriteLine("--> Please input username");
+            string username = Console.ReadLine();
             Console.WriteLine("--> Please input password");
-            string password = Console.ReadLine()?.Trim();
+            string password = Console.ReadLine();
 
-            if (dict_login.TryGetValue(username, out string value) && value == password) {
+            if (dict_login.TryGetValue(username, password) && value == password) {
                 Console.WriteLine("Login Successfully.");
                 return true;
             } else {
@@ -28,8 +30,10 @@ namespace FinalProject{
             }
         }
     
-        static void Main(string[] args) {
+       public static void Main(string[] args) {
+           
             dict_login.Add("Alice", "123");
+            var Room = new Dictionary<string, string>()
             Dictionary<int, Room> reservedRooms = new Dictionary<int, Room>();
             initialize_menu();
 
