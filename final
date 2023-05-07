@@ -2,262 +2,227 @@ using System;
 using System.Collections.Generic;
 
 namespace FinalProject{
-  class Room {
-         public int Number {get; private set;}
-         public int Capacity {get; private set;}
-         public string CustomerName {get; private set;}
-         public string CustomerEmail {get; private set;}
-         private bool reserved;
+  public class Room {
+         public int Number {get;}
+         public int Capacity {get;}
+         public string? CustomerName {get; private set;}
+         public string? CustomerEmail {get; private set;}
+         private bool reservedRoom;
+         public bool IsReserved {get; set;}
          
          public Room(int number, int capacity){
          Number = number; 
          Capacity = capacity; }
+
+         public void Reserve(string customerName) {
+            if (!reservedRoom) {
+                CustomerName = customerName;
+                reservedRoom = true; }
+                else {
+                    Console.WriteLine($"Sorry, Room {Number} is already reserved."); }
+            }
+
          
          public bool IsAvailable() {
-         return !reserved; }
+         return !reservedRoom; }
          
          public void CheckIn(string customerName, string customerEmail) {
          if (customerName != null && customerEmail != null) {
          CustomerName = customerName; 
          CustomerEmail = customerEmail; 
-         reserved = true; } }
+         reservedRoom = true; } }
          
          public void CheckOut() {
          CustomerName = null; 
          CustomerEmail = null; 
-         reserved = false; } }
+         reservedRoom = false; } }
   
   class Program {
         static Dictionary<string, string> dict_login = new Dictionary<string, string>() {
-        {"Alice" , "123"} };
+        {"alice" , "alice123"} };
         static List<Room> rooms = new List<Room>();
         static List<string> availableRooms = new List<string>();
-        static Dictionary<string, Room> reservedRooms = new Dictionary<string, Room>();
+        static Dictionary<string, Room> reservedRoom = new Dictionary<string, Room>();
 
-        static void initialize_menu() {
-            Console.WriteLine("-----CIDM2315 Final Project: Alyssa Doggett------");
-            Console.WriteLine("-----Welcome to Buff Hotel------"); }
 
         static bool employee_login(Dictionary<string, string> dict_login) {
+        Console.WriteLine("-----CIDM2315 Final Project: Alyssa Doggett------");
+         Console.WriteLine("-----Welcome to Buff Hotel------"); 
+
            Console.WriteLine("--> Please input username");
-            string username = Console.ReadLine();
+            string? username = Console.ReadLine();
             Console.WriteLine("--> Please input password");
-            string password = Console.ReadLine();
+            string? password = Console.ReadLine();
 
-            if (dict_login.TryGetValue(username, out string value) && value == password) {
-                Console.WriteLine("Login Successfully.");
-                return true; }
-            else {
+            if (dict_login != null && username != null && dict_login.TryGetValue(username, out string? correct_password)) {
+                if(correct_password == password) {
+                Console.WriteLine("-->Login Successfully.");
+                return true; } }
+
                 Console.WriteLine("--> Wrong Username/Password");
-                return false; } }
+                return false; } 
     
-       public static void Main(string[] args) {
+      public static void Main(string[] args)
+{
+    if (!employee_login(dict_login))
+    {
+        return;
+    }
 
-            Room room1 = new Room(101, 2);
-            Room room2 = new Room(102, 2);
-            Room room3 = new Room(103, 2);
-            Room room4 = new Room(104, 2);
-            Room room5 = new Room(105, 2);
-            Room room6 = new Room(106, 3);
-            Room room7 = new Room(107, 3);
-            Room room8 = new Room(108, 3);
-            Room room9 = new Room(109, 3);
-            Room room10 = new Room(110, 4);
+    Room room1 = new Room(101, 2);
+    Room room2 = new Room(102, 2);
+    Room room3 = new Room(103, 2);
+    Room room4 = new Room(104, 2);
+    Room room5 = new Room(105, 2);
+    Room room6 = new Room(106, 3);
+    Room room7 = new Room(107, 3);
+    Room room8 = new Room(108, 3);
+    Room room9 = new Room(109, 3);
+    Room room10 = new Room(110, 4);
 
-            rooms.Add(room1);
-            rooms.Add(room2);
-            rooms.Add(room3);
-            rooms.Add(room4);
-            rooms.Add(room5);
-            rooms.Add(room6);
-            rooms.Add(room7);
-            rooms.Add(room8);
-            rooms.Add(room9);
-            rooms.Add(room10);
+    rooms.Add(room1);
+    rooms.Add(room2);
+    rooms.Add(room3);
+    rooms.Add(room4);
+    rooms.Add(room5);
+    rooms.Add(room6);
+    rooms.Add(room7);
+    rooms.Add(room8);
+    rooms.Add(room9);
+    rooms.Add(room10);
 
-            room6.Reserve("Bob");
-            room7.Reserve("Cathy");
-            room9.Reserve("Jack");
+    availableRooms = new List<string>();
+    reservedRoom = new Dictionary<string, Room>();
 
-            availableRooms = new List<string>();
-            reservedRooms = new Dictionary<string, Room>();
+    while (true)
+    {
+        Console.WriteLine("** Hello User: alice **");
+        Console.WriteLine("*******************");
+        Console.WriteLine("--> Please select:");
+        Console.WriteLine("1. Show Available Room");
+        Console.WriteLine("2. Check-In");
+        Console.WriteLine("3. Show Reserved Room");
+        Console.WriteLine("4. Check-Out");
+        Console.WriteLine("5. Log Out");
+        Console.WriteLine("*******************");
 
-            while (true){
-                Console.WriteLine("** Hello User: alice **");
-                Console.WriteLine("*******************");
-                Console.WriteLine("--> Please select:");
-                Console.WriteLine("1. Show Available Room");
-                Console.WriteLine("2. Check-In");
-                Console.WriteLine("3. Show Reserved Room");
-                Console.WriteLine("4. Check-Out");
-                Console.WriteLine("5. Log Out");
-                Console.WriteLine("*******************");
+        string choice = Console.ReadLine();
 
-                string choice = Console.ReadLine();
+        switch (choice)
+        {
+            
+case "1":
+    Console.WriteLine("Show Available Rooms:");
+    availableRooms.Clear();
+    foreach (Room availableRoom in rooms)
+    {
+        if (!availableRoom.IsReserved)
+        {
+            Console.WriteLine($"+ Room number: {availableRoom.Number}; Capacity: {availableRoom.Capacity}");
+            availableRooms.Add(availableRoom.Number.ToString());
+        }
+    }
+    Console.WriteLine($"------Number of Available Rooms: {availableRooms.Count}------");
+    break;
 
-                switch (choice){
-                    case "1":
-                        Console.WriteLine("Show Available Room:");
-                        foreach (Room room in rooms) {
-                            if (!room.IsReserved()) {
-                                Console.WriteLine($"Room number: {room.Number} Capacity: {room.Capacity}"); } }
-                            Console.WriteLine("------Number of Available Rooms: 10------");
-                        break;
+case "2":
+    Console.WriteLine("--> Input number of people:");
+    int numPeople = int.Parse(Console.ReadLine());
 
-                    case "2":
-                        Console.Write("--> Input Number of People: ");
-                        int numPeople = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Available rooms with capacity >= " + numPeople);
-                        Console.WriteLine("Room No.\tCapacity");
-                        foreach (Room room in rooms) {
-                            if (room.IsAvailable() && room.Capacity >= numPeople) {
-                            Console.WriteLine(room.Number + "\t\t" + room.Capacity); } }
-                            
-                        Console.Write("--> Input Room Number: ");
-                        int Number = int.Parse(Console.ReadLine());
-                        Console.Write("--> Input Customer Name: ");
-                        string customerName = Console.ReadLine();
-                        Console.Write("--> Input Customer Email: ");
-                        string customerEmail = Console.ReadLine();
-                        bool roomFound = false;
-                            foreach (Room room in rooms) {
-                                if (room.Number == Number) {
-                                    roomFound = true;
-                                    room.CheckIn(customerName, customerEmail);
-                                    Console.WriteLine($"Check-In successfully! Customer is assigned to Room {roomNo}"); } }
-                          
-                          if (!roomFound) {
-                                Console.WriteLine("No suitable room at this time."); }
-                            break;
+    int availableCount = 0;
+    foreach (Room room in rooms)
+    {
+        if (!room.IsReserved && room.Capacity >= numPeople)
+        {
+            Console.WriteLine($"+ Room number: {room.Number}; Capacity: {room.Capacity}");
+            availableCount++;
+        }
+    }
 
-                    case "3":
-                        // view reserved rooms
-                        Console.WriteLine("------Reserved Room------");
-                        foreach (Room room in rooms) {
-                            if (room.IsReserved()) {
-                                Console.WriteLine($"+Room {room.Number}; Customer: {room.CustomerName};"); } }
-                        break;
+    if (availableCount == 0)
+    {
 
-                    case "4":
-                        Console.WriteLine("--> Please input room number:");
-                        string roomNumber = Console.ReadLine();
+        Console.WriteLine($"------Number of Available Rooms: {availableRooms.Count}------");
+        Console.WriteLine("--> No suitable room at this time.");
+        break;
+    }
 
-                        if (reservedRooms.TryGetValue(roomNumber, out Room room)) {
-                            Console.WriteLine($"--> Room: {roomNumber}; Customer Name: {room.CustomerName}");
+    Console.WriteLine($"------Number of Available Rooms: {availableCount}------");
 
-                            Console.WriteLine("--> Please confirm the customer name and input y to continue Check-Out OR input any key to cancel.");
-                            string confirmation = Console.ReadLine();
+    Console.WriteLine("--> Input Room Number:");
+    int roomNumber = int.Parse(Console.ReadLine());
+    Console.WriteLine("--> Input Customer Name:");
+    string customerName = Console.ReadLine();
+    Console.WriteLine("--> Input Customer Email:");
+    string customerEmail = Console.ReadLine();
 
-                            if (confirmation.ToLower().Equals("y")) {
-                                reservedRooms.Remove(int.Parse(roomNumber));
-                                availableRooms.Add(roomNumber);
-                                room.CheckOut();
-                                Console.WriteLine("-->Check-Out Successfully!"); }
-                            else {
-                                Console.WriteLine("--> Cancel Check-Out"); } }
-                        else {
-                            Console.WriteLine("--> Could not find customer record of this room"); }
-                        break;
+    Room selectedRoom = rooms.Find(room => room.Number == roomNumber);
 
-                    case "5":
-                        Console.WriteLine("--> Log out system");
-                        // additional cleanup code or logging out functionality can be added here
-                        Console.WriteLine("Quitting application. Press any key to exit...");
-                        Console.ReadKey();
-                        return; } }
-}}
+    if (selectedRoom != null && !selectedRoom.IsReserved && selectedRoom.Capacity >= numPeople)
+    {
+        selectedRoom.CheckIn(customerName, customerEmail);
+        reservedRoom.Add(selectedRoom.Number.ToString(), selectedRoom);
+        availableRooms.Remove(selectedRoom.Number.ToString());
+        Console.WriteLine($"Check-In successfully! Customer is assigned to Room {roomNumber}");
+    }
+    else
+    {
+        Console.WriteLine("No suitable room at this time.");
+    }
+    break;
 
 
+case "3":
+    // view reserved rooms
+    Console.WriteLine("------Reserved Room------");
+    foreach (Room reservedRoom in reservedRoom.Values)
+    {
+        Console.WriteLine($"+ Room {reservedRoom.Number}; Customer: {reservedRoom.CustomerName}; Email: {reservedRoom.CustomerEmail}");
+    }
+    break;
 
+case "4":
+    Console.WriteLine("--> Please input room number:");
+    int roomNumberToCheckOut = int.Parse(Console.ReadLine());
 
+    bool roomFoundToCheckOut = false;
+    foreach (Room reserved in rooms)
+    {
+        if (reserved.Number == roomNumberToCheckOut && reserved.IsReserved)
+        {
+            Console.WriteLine($"--> Room: {reserved.Number}; Customer Name: {reserved.CustomerName}");
+            Console.WriteLine("--> Please confirm the customer name and input y to continue Check-Out OR input any key to cancel.");
+            string confirmation = Console.ReadLine();
 
+            if (confirmation.ToLower().Equals("y"))
+            {
+                reserved.CheckOut();
+                reservedRoom.Remove(reserved.Number.ToString());
+                availableRooms.Add(reserved.Number.ToString());
+                Console.WriteLine("-->Check-Out Successfully!");
+            }
+            else
+            {
+                Console.WriteLine("--> Cancel Check-Out");
+            }
 
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(18,31): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\CI
-DM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(20,31): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\CI
-DM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(22,40): warning CS8604: Possible null reference argument for parameter 'key' in 'bool Dictionary<string, string>.TryGetValue(str
-ing key, out string value)'. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(22,54): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\CI
-DM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(39,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(40,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(41,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(42,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(43,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(44,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(45,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(46,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(47,40): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(48,41): error CS1503: Argument 2: cannot convert from 'int' to 'string' [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\F 
-inalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(84,39): error CS0136: A local or parameter named 'room' cannot be declared in this scope because that name is used in an enclosi 
-ng local scope to define a local or parameter [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(87,96): error CS1061: 'Program.Room' does not contain a definition for 'Capacity' and no accessible extension method 'Capacity'  
-accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProjec 
-t.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(98,39): error CS0136: A local or parameter named 'room' cannot be declared in this scope because that name is used in an enclosi 
-ng local scope to define a local or parameter [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(100,38): error CS1061: 'Program.Room' does not contain a definition for 'IsAvailable' and no accessible extension method 'IsAvai 
-lable' accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Fina 
-lProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(100,60): error CS1061: 'Program.Room' does not contain a definition for 'Capacity' and no accessible extension method 'Capacity' 
- accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProje 
-ct.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(102,52): error CS1061: 'Program.Room' does not contain a definition for 'RoomNo' and no accessible extension method 'RoomNo' acc 
-epting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.c 
-sproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(102,75): error CS1061: 'Program.Room' does not contain a definition for 'Capacity' and no accessible extension method 'Capacity' 
- accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProje 
-ct.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(112,43): error CS0136: A local or parameter named 'room' cannot be declared in this scope because that name is used in an enclos 
-ing local scope to define a local or parameter [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(114,42): error CS1061: 'Program.Room' does not contain a definition for 'RoomNo' and no accessible extension method 'RoomNo' acc 
-epting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.c 
-sproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(117,42): error CS1061: 'Program.Room' does not contain a definition for 'CheckIn' and no accessible extension method 'CheckIn' a 
-ccepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject 
-.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(130,39): error CS0136: A local or parameter named 'room' cannot be declared in this scope because that name is used in an enclos
-ing local scope to define a local or parameter [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(154,38): error CS1061: 'Program.Room' does not contain a definition for 'CheckOut' and no accessible extension method 'CheckOut' 
- accepting a first argument of type 'Program.Room' could be found (are you missing a using directive or an assembly reference?) [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProje 
-ct.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(79,33): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\CI 
-DM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(95,51): warning CS8604: Possible null reference argument for parameter 's' in 'int int.Parse(string s)'. [C:\Users\alyda\OneDriv 
-e\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(106,48): warning CS8604: Possible null reference argument for parameter 's' in 'int int.Parse(string s)'. [C:\Users\alyda\OneDri 
-ve\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(108,47): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
-IDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(110,48): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
-IDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(141,45): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
-IDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(143,65): warning CS8604: Possible null reference argument for parameter 's' in 'int int.Parse(string s)'. [C:\Users\alyda\OneDri 
-ve\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(143,82): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
-IDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(148,51): warning CS8600: Converting null literal or possible null value to non-nullable type. [C:\Users\alyda\OneDrive\Desktop\C 
-IDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(150,33): warning CS8602: Dereference of a possibly null reference. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalP 
-roject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(190,28): warning CS8625: Cannot convert null literal to non-nullable reference type. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\F 
-inalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(185,16): warning CS8618: Non-nullable field 'customerName' must contain a non-null value when exiting constructor. Consider decl
-aring the field as nullable. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\FinalProject.csproj]
-C:\Users\alyda\OneDrive\Desktop\CIDM2315\FinalProject\Program.cs(212,28): warning CS8625: Cannot convert null literal to non-nullable reference type. [C:\Users\alyda\OneDrive\Desktop\CIDM2315\F 
-inalProject\FinalProject.csproj]
+            roomFoundToCheckOut = true;
+            break;
+        }
+    }
 
-The build failed. Fix the build errors and run again.
-    
+    if (!roomFoundToCheckOut)
+    {
+        Console.WriteLine($"--> Could not find customer record with number {roomNumberToCheckOut}.");
+    }
+
+    break;
+
+case "5":
+    Console.WriteLine("--> Logging out...");
+        Console.WriteLine("*******************");
+    Console.WriteLine("Quitting application. Press any key to exit...");
+    Console.ReadKey();
+    return;
+ } }
+}}}
