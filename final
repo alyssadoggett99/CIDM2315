@@ -255,3 +255,5 @@ class Program
         }
     }
 }
+
+CAN DELETE "?" ON LINE 9, 10
