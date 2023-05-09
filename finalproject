@@ -8,7 +8,7 @@ namespace FinalProject{
          public string? CustomerName {get; private set;}
          public string? CustomerEmail {get; private set;}
          private bool reservedRoom;
-         public bool IsReserved {get; set;}
+         public bool IsReserved {get {return reservedRoom};}
          
          public Room(int number, int capacity){
          Number = number; 
