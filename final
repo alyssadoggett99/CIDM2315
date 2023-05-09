@@ -2,227 +2,257 @@ using System;
 using System.Collections.Generic;
 
 namespace FinalProject{
-  public class Room {
-         public int Number {get;}
-         public int Capacity {get;}
-         public string? CustomerName {get; private set;}
-         public string? CustomerEmail {get; private set;}
-         private bool reservedRoom;
-         public bool IsReserved {get; set;}
-         
-         public Room(int number, int capacity){
-         Number = number; 
-         Capacity = capacity; }
-
-         public void Reserve(string customerName) {
-            if (!reservedRoom) {
-                CustomerName = customerName;
-                reservedRoom = true; }
-                else {
-                    Console.WriteLine($"Sorry, Room {Number} is already reserved."); }
-            }
-
-         
-         public bool IsAvailable() {
-         return !reservedRoom; }
-         
-         public void CheckIn(string customerName, string customerEmail) {
-         if (customerName != null && customerEmail != null) {
-         CustomerName = customerName; 
-         CustomerEmail = customerEmail; 
-         reservedRoom = true; } }
-         
-         public void CheckOut() {
-         CustomerName = null; 
-         CustomerEmail = null; 
-         reservedRoom = false; } }
-  
-  class Program {
-        static Dictionary<string, string> dict_login = new Dictionary<string, string>() {
-        {"alice" , "alice123"} };
-        static List<Room> rooms = new List<Room>();
-        static List<string> availableRooms = new List<string>();
-        static Dictionary<string, Room> reservedRoom = new Dictionary<string, Room>();
-
-
-        static bool employee_login(Dictionary<string, string> dict_login) {
-        Console.WriteLine("-----CIDM2315 Final Project: Alyssa Doggett------");
-         Console.WriteLine("-----Welcome to Buff Hotel------"); 
-
-           Console.WriteLine("--> Please input username");
-            string? username = Console.ReadLine();
-            Console.WriteLine("--> Please input password");
-            string? password = Console.ReadLine();
-
-            if (dict_login != null && username != null && dict_login.TryGetValue(username, out string? correct_password)) {
-                if(correct_password == password) {
-                Console.WriteLine("-->Login Successfully.");
-                return true; } }
-
-                Console.WriteLine("--> Wrong Username/Password");
-                return false; } 
-    
-      public static void Main(string[] args)
+public class Room
 {
-    if (!employee_login(dict_login))
+    public int Number { get; }
+    public int Capacity { get; }
+    public string? CustomerName { get; private set; }
+    public string? CustomerEmail { get; private set; }
+    private bool reservedRoom;
+    public bool IsReserved { get { return reservedRoom; } }
+
+    public Room(int number, int capacity)
     {
-        return;
+        Number = number;
+        Capacity = capacity;
     }
 
-    Room room1 = new Room(101, 2);
-    Room room2 = new Room(102, 2);
-    Room room3 = new Room(103, 2);
-    Room room4 = new Room(104, 2);
-    Room room5 = new Room(105, 2);
-    Room room6 = new Room(106, 3);
-    Room room7 = new Room(107, 3);
-    Room room8 = new Room(108, 3);
-    Room room9 = new Room(109, 3);
-    Room room10 = new Room(110, 4);
-
-    rooms.Add(room1);
-    rooms.Add(room2);
-    rooms.Add(room3);
-    rooms.Add(room4);
-    rooms.Add(room5);
-    rooms.Add(room6);
-    rooms.Add(room7);
-    rooms.Add(room8);
-    rooms.Add(room9);
-    rooms.Add(room10);
-
-    availableRooms = new List<string>();
-    reservedRoom = new Dictionary<string, Room>();
-
-    while (true)
+    public void Reserve(string customerName)
     {
-        Console.WriteLine("** Hello User: alice **");
-        Console.WriteLine("*******************");
-        Console.WriteLine("--> Please select:");
-        Console.WriteLine("1. Show Available Room");
-        Console.WriteLine("2. Check-In");
-        Console.WriteLine("3. Show Reserved Room");
-        Console.WriteLine("4. Check-Out");
-        Console.WriteLine("5. Log Out");
-        Console.WriteLine("*******************");
-
-        string choice = Console.ReadLine();
-
-        switch (choice)
+        if (!reservedRoom)
         {
-            
-case "1":
-    Console.WriteLine("Show Available Rooms:");
-    availableRooms.Clear();
-    foreach (Room availableRoom in rooms)
-    {
-        if (!availableRoom.IsReserved)
-        {
-            Console.WriteLine($"+ Room number: {availableRoom.Number}; Capacity: {availableRoom.Capacity}");
-            availableRooms.Add(availableRoom.Number.ToString());
+            CustomerName = customerName;
+            reservedRoom = true;
         }
-    }
-    Console.WriteLine($"------Number of Available Rooms: {availableRooms.Count}------");
-    break;
-
-case "2":
-    Console.WriteLine("--> Input number of people:");
-    int numPeople = int.Parse(Console.ReadLine());
-
-    int availableCount = 0;
-    foreach (Room room in rooms)
-    {
-        if (!room.IsReserved && room.Capacity >= numPeople)
+        else
         {
-            Console.WriteLine($"+ Room number: {room.Number}; Capacity: {room.Capacity}");
-            availableCount++;
+            Console.WriteLine($"Sorry, Room {Number} is already reserved.");
         }
     }
 
-    if (availableCount == 0)
-    {
 
-        Console.WriteLine($"------Number of Available Rooms: {availableRooms.Count}------");
-        Console.WriteLine("--> No suitable room at this time.");
-        break;
+    public bool IsAvailable()
+    {
+        return !reservedRoom;
     }
 
-    Console.WriteLine($"------Number of Available Rooms: {availableCount}------");
-
-    Console.WriteLine("--> Input Room Number:");
-    int roomNumber = int.Parse(Console.ReadLine());
-    Console.WriteLine("--> Input Customer Name:");
-    string customerName = Console.ReadLine();
-    Console.WriteLine("--> Input Customer Email:");
-    string customerEmail = Console.ReadLine();
-
-    Room selectedRoom = rooms.Find(room => room.Number == roomNumber);
-
-    if (selectedRoom != null && !selectedRoom.IsReserved && selectedRoom.Capacity >= numPeople)
+    public void CheckIn(string customerName, string customerEmail)
     {
-        selectedRoom.CheckIn(customerName, customerEmail);
-        reservedRoom.Add(selectedRoom.Number.ToString(), selectedRoom);
-        availableRooms.Remove(selectedRoom.Number.ToString());
-        Console.WriteLine($"Check-In successfully! Customer is assigned to Room {roomNumber}");
-    }
-    else
-    {
-        Console.WriteLine("No suitable room at this time.");
-    }
-    break;
-
-
-case "3":
-    // view reserved rooms
-    Console.WriteLine("------Reserved Room------");
-    foreach (Room reservedRoom in reservedRoom.Values)
-    {
-        Console.WriteLine($"+ Room {reservedRoom.Number}; Customer: {reservedRoom.CustomerName}; Email: {reservedRoom.CustomerEmail}");
-    }
-    break;
-
-case "4":
-    Console.WriteLine("--> Please input room number:");
-    int roomNumberToCheckOut = int.Parse(Console.ReadLine());
-
-    bool roomFoundToCheckOut = false;
-    foreach (Room reserved in rooms)
-    {
-        if (reserved.Number == roomNumberToCheckOut && reserved.IsReserved)
+        if (customerName != null && customerEmail != null)
         {
-            Console.WriteLine($"--> Room: {reserved.Number}; Customer Name: {reserved.CustomerName}");
-            Console.WriteLine("--> Please confirm the customer name and input y to continue Check-Out OR input any key to cancel.");
-            string confirmation = Console.ReadLine();
+            CustomerName = customerName;
+            CustomerEmail = customerEmail;
+            reservedRoom = true;
+        }
+    }
 
-            if (confirmation.ToLower().Equals("y"))
+    public void CheckOut()
+    {
+        CustomerName = null;
+        CustomerEmail = null;
+        reservedRoom = false;
+    }
+}
+
+class Program
+{
+    static Dictionary<string, string> dict_login = new Dictionary<string, string>() {
+        {"alice" , "alice123"} };
+    static List<Room> rooms = new List<Room>();
+    static List<string> availableRooms = new List<string>();
+    static Dictionary<string, Room> reservedRoom = new Dictionary<string, Room>();
+
+
+    static bool employee_login(Dictionary<string, string> dict_login)
+    {
+        Console.WriteLine("-----CIDM2315 Final Project: Alyssa Doggett------");
+        Console.WriteLine("-----Welcome to Buff Hotel------");
+
+        Console.WriteLine("--> Please input username");
+        string? username = Console.ReadLine();
+        Console.WriteLine("--> Please input password");
+        string? password = Console.ReadLine();
+
+        if (dict_login != null && username != null && dict_login.TryGetValue(username, out string? correct_password))
+        {
+            if (correct_password == password)
             {
-                reserved.CheckOut();
-                reservedRoom.Remove(reserved.Number.ToString());
-                availableRooms.Add(reserved.Number.ToString());
-                Console.WriteLine("-->Check-Out Successfully!");
+                Console.WriteLine("--> Login Successfully.");
+                return true;
             }
-            else
-            {
-                Console.WriteLine("--> Cancel Check-Out");
-            }
+        }
 
-            roomFoundToCheckOut = true;
-            break;
+        Console.WriteLine("--> Wrong Username/Password");
+        return false;
+    }
+
+    public static void Main(string[] args)
+    {
+        if (!employee_login(dict_login))
+        {
+            return;
+        }
+
+        Room room1 = new Room(101, 2);
+        Room room2 = new Room(102, 2);
+        Room room3 = new Room(103, 2);
+        Room room4 = new Room(104, 2);
+        Room room5 = new Room(105, 2);
+        Room room6 = new Room(106, 3);
+        Room room7 = new Room(107, 3);
+        Room room8 = new Room(108, 3);
+        Room room9 = new Room(109, 3);
+        Room room10 = new Room(110, 4);
+
+        rooms.Add(room1);
+        rooms.Add(room2);
+        rooms.Add(room3);
+        rooms.Add(room4);
+        rooms.Add(room5);
+        rooms.Add(room6);
+        rooms.Add(room7);
+        rooms.Add(room8);
+        rooms.Add(room9);
+        rooms.Add(room10);
+
+        availableRooms = new List<string>();
+        reservedRoom = new Dictionary<string, Room>();
+
+        while (true)
+        {
+            Console.WriteLine("** Hello User: alice **");
+            Console.WriteLine("*******************");
+            Console.WriteLine("--> Please select:");
+            Console.WriteLine("1. Show Available Room");
+            Console.WriteLine("2. Check-In");
+            Console.WriteLine("3. Show Reserved Room");
+            Console.WriteLine("4. Check-Out");
+            Console.WriteLine("5. Log Out");
+            Console.WriteLine("*******************");
+
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+
+                case "1":
+                    Console.WriteLine("Show Available Rooms:");
+                    availableRooms.Clear();
+                    foreach (Room availableRoom in rooms)
+                    {
+                        if (!availableRoom.IsReserved)
+                        {
+                            Console.WriteLine($"+ Room number: {availableRoom.Number}; Capacity: {availableRoom.Capacity}");
+                            availableRooms.Add(availableRoom.Number.ToString());
+                        }
+                    }
+                    Console.WriteLine($"------Number of Available Rooms: {availableRooms.Count}------");
+                    break;
+
+                case "2":
+                    Console.WriteLine("--> Input number of people:");
+                    int numPeople = int.Parse(Console.ReadLine());
+
+                    int availableCount = 0;
+                    foreach (Room room in rooms)
+                    {
+                        if (!room.IsReserved && room.Capacity >= numPeople)
+                        {
+                            Console.WriteLine($"+ Room number: {room.Number}; Capacity: {room.Capacity}");
+                            availableCount++;
+                        }
+                    }
+
+                    if (availableCount == 0)
+                    {
+
+                        Console.WriteLine($"------Number of Available Rooms: {availableCount}------");
+                        Console.WriteLine("--> No suitable room at this time.");
+                        break;
+                    }
+
+                    Console.WriteLine($"------Number of Available Rooms: {availableCount}------");
+
+                    Console.WriteLine("--> Input Room Number:");
+                    int roomNumber = int.Parse(Console.ReadLine());
+                    Console.WriteLine("--> Input Customer Name:");
+                    string customerName = Console.ReadLine();
+                    Console.WriteLine("--> Input Customer Email:");
+                    string customerEmail = Console.ReadLine();
+
+                    Room selectedRoom = rooms.Find(room => room.Number == roomNumber);
+
+                    if (selectedRoom != null && !selectedRoom.IsReserved && selectedRoom.Capacity >= numPeople)
+                    {
+                        selectedRoom.CheckIn(customerName, customerEmail);
+                        reservedRoom.Add(selectedRoom.Number.ToString(), selectedRoom);
+                        availableRooms.Remove(selectedRoom.Number.ToString());
+                        Console.WriteLine($"--> Check-In successfully! Customer is assigned to Room {roomNumber}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No suitable room at this time.");
+                    }
+                    break;
+
+
+                case "3":
+                    Console.WriteLine("------Reserved Room------");
+                    foreach (Room reservedRoom in reservedRoom.Values)
+                    {
+                        Console.WriteLine($"+ Room {reservedRoom.Number}; Customer: {reservedRoom.CustomerName}; Email: {reservedRoom.CustomerEmail}");
+                    }
+                    break;
+
+                case "4":
+                    Console.WriteLine("--> Please input room number:");
+                    int roomNumberToCheckOut = int.Parse(Console.ReadLine());
+
+                    bool roomFoundToCheckOut = false;
+                    foreach (Room reserved in rooms)
+                    {
+                        if (reserved.Number == roomNumberToCheckOut && reserved.IsReserved)
+                        {
+                            Console.WriteLine($"--> Room: {reserved.Number}; Customer Name: {reserved.CustomerName}");
+                            Console.WriteLine("--> Please confirm the customer name and input y to continue Check-Out OR input any key to cancel.");
+                            string confirmation = Console.ReadLine();
+
+                            if (confirmation.ToLower().Equals("y"))
+                            {
+                                reserved.CheckOut();
+                                reservedRoom.Remove(reserved.Number.ToString());
+                                availableRooms.Add(reserved.Number.ToString());
+                                Console.WriteLine("--> Check-Out Successfully!");
+                                Console.WriteLine("------Reserved Room------");
+                                  foreach (Room reservedRoom in reservedRoom.Values)
+                                  {
+                                      Console.WriteLine($"+ Room {reservedRoom.Number}; Customer: {reservedRoom.CustomerName}; Email: {reservedRoom.CustomerEmail}");
+                                  }
+                            }
+                            else
+                            {
+                                Console.WriteLine("--> Cancel Check-Out");
+                            }
+
+                            roomFoundToCheckOut = true;
+                            break;
+                        }
+                    }
+
+                    if (!roomFoundToCheckOut)
+                    {
+                        Console.WriteLine($"--> Could not find customer record with number {roomNumberToCheckOut}.");
+                    }
+
+                    break;
+
+                case "5":
+                    Console.WriteLine("--> Logging out...");
+                    Console.WriteLine("*******************");
+                    Console.WriteLine("Quitting application. Press any key to exit...");
+                    Console.ReadKey();
+                    return;
+            }
         }
     }
-
-    if (!roomFoundToCheckOut)
-    {
-        Console.WriteLine($"--> Could not find customer record with number {roomNumberToCheckOut}.");
-    }
-
-    break;
-
-case "5":
-    Console.WriteLine("--> Logging out...");
-        Console.WriteLine("*******************");
-    Console.WriteLine("Quitting application. Press any key to exit...");
-    Console.ReadKey();
-    return;
- } }
-}}}
+}
